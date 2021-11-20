@@ -58,7 +58,7 @@ for layer_size in resnet_layers:
 layer_out = layers.Flatten()(layer_out)
 # layer_out = layers.ReLU()(layer_out)
 model_out = layers.Dense(32)(layer_out)
-model_out = layers.Dense(16)(layer_out)
+model_out = layers.Dense(8)(layer_out)
 
 model = models.Model(inputs=model_in, outputs=model_out)
 model.compile(optimizer='rmsprop', loss=is_this_loss, run_eagerly=True)
@@ -81,7 +81,7 @@ model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
     mode='min',
     save_best_only=True)
 
-history = model.fit(train_images, train_labels, epochs=1000000, batch_size=64, callbacks=[model_checkpoint_callback])
+# history = model.fit(train_images, train_labels, epochs=1000000, batch_size=64, callbacks=[model_checkpoint_callback])
 
 
 ####################### VISUALISATION #######################
@@ -98,16 +98,16 @@ pred = model.predict(ims)
 
 for i, image in enumerate(ims):
     plt.imshow(ims[i])
-    plt.scatter((labs[i].reshape(8, 2).transpose()[0] + 0) * 1, (labs[i].reshape(8, 2).transpose()[1] + 0) * 1)
-    plt.scatter((pred[i].reshape(8, 2).transpose()[0] + 0) * 1, (pred[i].reshape(8, 2).transpose()[1] + 0) * 1)
-    plt.plot((labs[i].reshape(8, 2).transpose()[0] + 0) * 1, (labs[i].reshape(8, 2).transpose()[1] + 0) * 1)
-    plt.plot((pred[i].reshape(8, 2).transpose()[0] + 0) * 1, (pred[i].reshape(8, 2).transpose()[1] + 0) * 1)
+    plt.scatter((labs[i].reshape(4, 2).transpose()[0] + 0) * 1, (labs[i].reshape(4, 2).transpose()[1] + 0) * 1)
+    plt.scatter((pred[i].reshape(4, 2).transpose()[0] + 0) * 1, (pred[i].reshape(4, 2).transpose()[1] + 0) * 1)
+    plt.plot((labs[i].reshape(4, 2).transpose()[0] + 0) * 1, (labs[i].reshape(4, 2).transpose()[1] + 0) * 1)
+    plt.plot((pred[i].reshape(4, 2).transpose()[0] + 0) * 1, (pred[i].reshape(4, 2).transpose()[1] + 0) * 1)
 
-    print("#" * 30)
-    print(labs[i].reshape(8, 2))
-    print(pred[i].reshape(8, 2))
-    print(labs[i].reshape(8, 2) - pred[i].reshape(8, 2))
-    print(np.mean(np.square(labs[i].reshape(8, 2) - pred[i].reshape(8, 2))))
+    # print("#" * 30)
+    # print(labs[i].reshape(4, 2))
+    # print(pred[i].reshape(4, 2))
+    # print(labs[i].reshape(8, 2) - pred[i].reshape(8, 2))
+    # print(np.mean(np.square(labs[i].reshape(8, 2) - pred[i].reshape(8, 2))))
 
     plt.show()
 

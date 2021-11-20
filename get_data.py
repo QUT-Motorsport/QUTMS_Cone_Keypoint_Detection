@@ -13,7 +13,7 @@ def get_data(train_split=0.7, val_split=0.2, data_path='dataset/striped'):
     # empty arrays for images/labels
     data_size = len(file_names)
     images = np.zeros((data_size, 100, 100, 3))
-    labels = np.zeros((data_size, 16))
+    labels = np.zeros((data_size, 8))
     for i, file in enumerate(file_names):
         images[i] = np.asarray(Image.open('{}/{}.jpg'.format(data_path, file)))
 
@@ -30,7 +30,7 @@ def get_data(train_split=0.7, val_split=0.2, data_path='dataset/striped'):
         keypoints = np.array(label_data["shapes"][0]["points"])
         order = keypoints[:, 0].argsort()
         # shape label
-        labels[i] = keypoints[order, :].reshape(16)
+        labels[i] = keypoints[order, :][[0, 3, 4, 7], :].reshape(8)
 
     # scale down to 0-1 range
     images = images.astype('float32') / 255

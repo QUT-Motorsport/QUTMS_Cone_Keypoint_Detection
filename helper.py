@@ -20,12 +20,12 @@ def is_this_loss(true, pred):
         count = count + 1
         pred_y = pred_np[j, :]
         true_y = true_np[j, :]
-        for i in range(0, 15, step=2):
+        for i in range(0, len(pred_y)-1, step=2):
             loss = loss + K.sqrt(K.square(pred_y[i] - true_y[i]) + K.square(pred_y[i+1] - true_y[i+1]))
 
     # squares = K.square(true - pred)
     # Cs = K.sum(squares, axis=)
-    return K.mean(K.square(pred-true)) + (loss/count) # K.mean(squares) +
+    return K.mean(K.square(pred-true)) #+ (loss/count+0.00001) # K.mean(squares) +
     # true = true.numpy().reshape((len(true), 8, 2))
     # pred = pred.numpy().reshape((len(pred), 8, 2))
     #
