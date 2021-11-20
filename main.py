@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 from keras import layers, models
 
 from get_data import get_data
-from random_shit import *
+from helper import *
 ####################### DATA #######################
 train_images, val_images, test_images, train_labels, val_labels, test_labels = get_data(train_split=1, val_split=0)
 

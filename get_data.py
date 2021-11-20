@@ -5,9 +5,9 @@ import numpy as np
 from PIL import Image
 
 
-def get_data(train_split=0.7, val_split=0.2):
+def get_data(train_split=0.7, val_split=0.2, data_path='dataset/striped'):
     # get list of file name
-    dataset = os.listdir("dataset")
+    dataset = os.listdir(data_path)
     file_names = [file[:-4] for file in dataset if file[-3:] == "jpg"]
 
     # empty arrays for images/labels
@@ -15,10 +15,13 @@ def get_data(train_split=0.7, val_split=0.2):
     images = np.zeros((data_size, 100, 100, 3))
     labels = np.zeros((data_size, 16))
     for i, file in enumerate(file_names):
-        images[i] = np.asarray(Image.open('dataset/{}.jpg'.format(file)))
+        images[i] = np.asarray(Image.open('{}/{}.jpg'.format(data_path, file)))
 
         # parse label
-        label_file = open('dataset/{}.json'.format(file))
+        try:
+            label_file = open('{}/{}.json'.format(data_path, file))
+        except:
+            continue
         label_data = json.load(label_file)
         label_file.close()
         # assert label
