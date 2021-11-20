@@ -8,7 +8,7 @@ from PIL import Image
 def get_data(train_split=0.7, val_split=0.2, data_path='dataset/striped'):
     # get list of file name
     dataset = os.listdir(data_path)
-    file_names = [file[:-4] for file in dataset if file[-3:] == "jpg"]
+    file_names = [file[:-5] for file in dataset if file[-4:] == "json"]
 
     # empty arrays for images/labels
     data_size = len(file_names)

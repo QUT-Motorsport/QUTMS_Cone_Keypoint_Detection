@@ -81,15 +81,14 @@ model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
     mode='min',
     save_best_only=True)
 
-# history = model.fit(train_images, train_labels, epochs=1000000, batch_size=64, callbacks=[model_checkpoint_callback])
-
-
+history = model.fit(train_images, train_labels, epochs=1000000, batch_size=64, callbacks=[model_checkpoint_callback])
 
 
 ####################### VISUALISATION #######################
 # model - 21-11-13.save_weights(checkpoint_path)
-ims = train_images
-labs = train_labels
+print(len(train_images))
+ims = train_images[-30:]
+labs = train_labels[-30:]
 pred = model.predict(ims)
 
 # print(train_images)
